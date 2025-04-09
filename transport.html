@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport</title>
+</head>
+<body>
+    <h1>Booking Form</h1>
+    <p>Vendor : <input type="text" name="vendor" id="vendor"></p>
+    <p>Speed : <input type="text" name="speed" id="speed"></p>
+    <p>Path : <input type="text" name="path" id="path"></p>
+    <p>Transport Type :<select>
+        <option value="Flight" id="Flight">Flight</option>
+        <option value="Truck" id="Truck">Truck</option>
+        <option value="Train" id="Train">Train</option>
+    </select></p>
+    <button type="button">Book</button>
+    <div id="output"></div> <!-- Div to display the details -->
+
+    <script>
+        class Transport {
+            constructor(vendor, speed, path) {
+                this.vendor = vendor;
+                this.speed = speed;
+                this.path = path;
+            }
+        }
+
+        class Flight extends Transport {
+            constructor(vendor, speed, path) {
+                super(vendor, speed, path);
+                this.type = "Flight";
+            }
+        }
+
+        class Truck extends Transport {
+            constructor(vendor, speed, path) {
+                super(vendor, speed, path);
+                this.type = "Truck";
+            }
+        }
+
+        class Train extends Transport {
+            constructor(vendor, speed, path) {
+                super(vendor, speed, path);
+                this.type = "Train";
+            }
+        }
+
+        document.querySelector('button').addEventListener('click', () => {
+            var transportType = document.querySelector('select').value;
+            var vendor = document.getElementById("vendor").value;
+            var speed = document.getElementById("speed").value;
+            var path = document.getElementById("path").value;
+            var transport;
+            var output = document.getElementById("output");
+
+            if (transportType === "Flight") {
+                transport = new Flight(vendor, speed, path);
+                transport.weight = "1 kg"; // Example weight property
+                output.innerHTML = `Details : Weight: ${transport.weight}`;
+            } else if (transportType === "Truck") {
+                transport = new Truck(vendor, speed, path);
+                transport.capacity = "20 tons"; // Example capacity property
+                output.innerHTML = ` Details : Capacity: ${transport.capacity}`;
+            } else if (transportType === "Train") {
+                transport = new Train(vendor, speed, path);
+                transport.coaches = 10; // Example coaches property
+                output.innerHTML = `Details : Coaches: ${transport.coaches}`;
+            }
+        });
+    </script>
+</body>
+</html>

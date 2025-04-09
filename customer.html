@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer</title>
+    <script type="text/javascript">
+
+class Details{
+                constructor(name,age,dob,number){
+                    this.name=name;
+                    this.age=age;
+                    this.dob=dob;
+                    this.number=number              
+                }
+            }
+         function Detail() {
+            var name = document.getElementById('name').value;
+            var age = document.getElementById('age').value;
+            var dob = document.getElementById('dob').value;
+            var number = document.getElementById('number').value;
+            var check = document.getElementById('check').checked;
+
+           
+
+            const myDetails = new Details(name,age,dob,number,check);
+
+            document.write("Name is: " + myDetails.name +"<br>");
+            document.write("Age is:" + myDetails.age +"<br>");
+            document.write("dob is:" + myDetails.dob +"<br>");
+            document.write("number is:" + myDetails.number +"<br>");
+            document.write("Local Customer: " + (check ? "Yes" : "No") + "<br>");
+        }
+    </script>
+</head>
+<body>
+    <h1>Customer</h1>
+    <form>
+        <p>Name : <input type="text" name="name" id="name"></p>
+        <p>Age : <input type="number" name="age" id="age"></p>
+        <p>Dob : <input type="date" name="dob" id="dob"></p>
+        <p>Mobile : <input type="number" name="number" id="number"></p>
+        <p><input type="checkbox" name="customer" id="check">Local Customer</p>
+        <p><input type="submit" value="submit" id="submit" onclick="Detail()" ></p>
+    </form>
+   
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+
+    <!-- <script>
+          function Loan()
+{
+    var openingbalance = document.getElementById("balance").value;
+    var amount = document.getElementById("amount").value; // Added .value to get the input value
+
+    var final = parseInt(openingbalance) +parseInt(amount);
+    document.write("your final balance is :" + final+"<br>")
+}    </script> -->
+</head>
+<body>
+    <h1>Account Details</h1>
+    <button type="button" onclick="handleTransaction('Loan')">Loan</button>
+    <button type="button" onclick="handleTransaction('deposit')">Deposit</button> <!--Add amount into opening balance-->
+    <button type="button" onclick="handleTransaction('withdraw')">Withdraw</button> <!--subtract amount into opening balance-->
+
+    <p>opening balance : <input type="number" value="number" name="openingbalance" id="balance"></p>
+    <p>Balance :</p>
+    <p>Amount : <input type="number" name="amount" id="amount"></p>
+
+    <script>
+        class Account {
+            constructor(balance) {
+                this.balance = isNaN(parseInt(balance)) ? 0 : parseInt(balance);
+            }
+            Loan(amount) {
+                this.balance += parseInt(amount);
+                return this.balance;
+            }
+    
+            deposit(amount) {
+                this.balance += parseInt(amount);
+                return this.balance;
+            }
+    
+            withdraw(amount) {
+                this.balance -= parseInt(amount);
+                return this.balance;
+            }
+    
+            getBalance() {
+                return this.balance;
+            }
+        }
+    
+        let account; // Declare account variable
+        function handleTransaction(type) {
+            const openingBalance = parseInt(document.getElementById("balance").value) ;
+            const amount = parseInt(document.getElementById("amount").value);
+
+            // Reinitialize account with the current opening balance
+            account = new Account(openingBalance);
+
+            if (type === 'deposit') {
+                account.deposit(amount);
+            } else if (type === 'Loan') {
+                account.Loan(amount);
+            } else if (type === 'withdraw') {
+                account.withdraw(amount);
+            }
+
+            // Update the balance input field with the new balance
+            document.getElementById("balance").value = account.getBalance();
+
+            document.write("Your final balance is: " + account.getBalance() + "<br>");
+        }
+    </script>
+</body>
+</html>

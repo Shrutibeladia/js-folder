@@ -1,0 +1,35 @@
+
+
+<!--Cookie : In JavaScript, cookies are piece of data stored in the user's web browser.
+The cookies are stored in the key-value pair inside the browser. We can manipulate 
+the cookies using cookie property of document object. We can set
+ or store a cookie in key-value pair using the cookie property. We can read cookies using
+  document's cookie property and extract the desired information using destructuring.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write cookie</title>
+    <script type="text/javascript">
+        function writeCookie(){
+            if(document.myform.customer.value == ""){
+                alert("enter some value !")
+                return;
+            }
+
+            cookievalue = escape(document.myform.customer.value) + ";";
+            document.cookie ="name+"+ cookievalue;
+            document.write("setting Cookies : " + "name =" + cookievalue);
+        }
+
+    </script>
+</head>
+<body>
+    <form name="myform" action="">
+   Enter name : <input type="text" name="customer"/>
+   <input type="button" value="Set Cookie" onClick="writeCookie();"/>
+    </form>
+</body>
+</html>

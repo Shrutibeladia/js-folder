@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inheritance</title>
+</head>
+<body>
+    <div id="output1">The brand of the bike is:</div>
+    <div id="output2">Total gears in the bike is :   </div>
+    <script>
+        //parent class
+        class Bike{
+            constructor()
+            {
+                this.gear=5;
+            }
+
+            getGears(){
+                return this.gear
+            }
+        }
+
+        //child class
+        class suzuki extends Bike{
+            constructor(){
+                super();
+                this.brand ="Yamaha"
+
+            }
+            getBrand(){
+                return this.brand;
+            }
+        }
+        const suzukiBike = new suzuki();
+        document.getElementById("output1").innerHTML += suzukiBike.getBrand();
+        document.getElementById("output2").innerHTML += suzukiBike.getGears(); //accessing parent method
+    </script>
+</body>
+</html>
