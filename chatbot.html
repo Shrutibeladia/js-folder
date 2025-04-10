@@ -1,0 +1,92 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shruti's ChatBot</title>
+ </head>
+ <body>
+    <h1>Shruti's AI ChatBot : Tech Company Case Study</h1>
+    <div id="chat-container">
+        <div id="messages"></div>
+        <input type="text" id="userInput" placeholder="Type a  message">
+        <button id="sendBtn">Send</button>
+    </div>
+    
+    <script>
+        //encapsulation : wrapping functionalities inside the chatbot class
+        class Chatbot {
+            constructor(name){
+                this.name = name;
+                this.messages=[];
+            }
+            //abstraction : Hiding internal message processing logic
+
+            processMessage(input){
+                return input.includes("hello") ? "Hi there ! How can I assist ?" : "I am still Learning !"
+            }
+
+            sendMessage(userMessage){
+                const botReply = this.processMessage(userMessage);
+                this.messages.push({user : userMessage , bot:botReply});
+
+                return botReply;
+            }
+        }
+
+        //Inheritance : Extending chatbot functionalities 
+        class SmartChatbot extends Chatbot{
+            constructor (name , version){
+             super(name);
+             this.version = version;
+            }
+
+            //polymorphism : Overriding parent method
+            processMessage(input){
+                return input.includes("AI") ? "AI is transforming industries !" : super.processMessage(input);
+            }
+        }
+
+        //closures : keepimng private chatbot state inside function
+        const chatbotManager = (function() {
+            let bot = new SmartChatbot("TecahBot" , "1.0");
+
+            return{
+                getBot: function(){
+                    return bot;
+                }
+            };
+        }) ();
+
+        const chatbot = chatbotManager.getBot();
+
+        // DOM manipulation: Updating chat messages dynamically
+        function updateChat(userMsg) {
+        const botResponse = chatbot.sendMessage(userMsg);
+        const messagesDiv = document.getElementById("messages");
+
+        // Corrected variable name and fixed HTML syntax
+        messagesDiv.innerHTML += `<div class="message"><strong>You:</strong> ${userMsg}</div>`;
+        messagesDiv.innerHTML += `<div class="message"><strong>${chatbot.name}:</strong> ${botResponse}</div>`;
+    }
+
+            // Error handling: Prevent empty message errors
+    function handleSend() {
+        try {
+            const userInput = document.getElementById("userInput");
+            if (!userInput.value.trim()) {
+                throw new Error("Message cannot be empty!");
+            }
+            updateChat(userInput.value);
+            userInput.value = ""; // Reset input field
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+
+
+        //Event
+        document.getElementById("sendBtn").addEventListener("click", handleSend);
+    </script>
+ </body>
+ </html>

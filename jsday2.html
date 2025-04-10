@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object oriented</title>
+</head>
+<body>
+    <h1>
+        Education Sector Case Study
+    </h1>
+    <div id="students"></div>
+
+    <script>
+        //Abstraction and encapsulation using class
+        class Student{
+            #grades;
+             //private variable that only access in class , used with #
+
+             constructor(name,age){
+                this.name = name;
+                this.age = age;
+                this.#grades = [];
+
+             }
+             addGrade(grade){
+                if(typeof grade !== 'number')throw new Error('Grade must be a number');
+                this.#grades.push(grade);
+             }
+
+             getAverageGrade(){
+                const total = this.#grades.reduce((acc,val) => acc+val, 0);
+                return (total / this.#grades.length).toFixed(2);
+             }
+
+             getInfo(){
+                return `${this.name} , Age :${this.age},Average Grade :${this.getAverageGrade()}`;
+             }
+        }
+
+        //Inheritance
+        class GraduateStudent extends Student{
+            constructor(name , age ,thesisTopic){
+                super(name , age);
+                this.thesisTopic = thesisTopic;
+            }
+
+            getInfo(){
+                return `${super.getInfo()} , thesis: ${this.thesisTopic}`;
+            }
+        }
+
+        //polymorphism through function overriding
+        const students = [
+            new Student ('Alice', 20),
+            new GraduateStudent('Bob',24 ,'AI in Education')
+        ];
+
+        //Add Sample grades with Error Handling
+        students.forEach(student => {
+            try{
+               student.addGrade(80);
+               student.addGrade(90);
+            }catch(err){
+                console.error(err.message)
+            }
+        });
+
+        //Closure Example
+        function createCounter(){
+            let count=0;
+            return function () {
+                count++;
+                return count;
+            };
+        }
+        
+        const studentIdCounter = createCounter();
+
+        //DOM Manipulation
+        const container = document.getElementById('students');
+
+        students.forEach (student =>{
+            const card= document.createElement('div');
+            card.className = 'student-card';
+
+            const id= studentIdCounter();
+            card.innerHTML = `<strong>Student ID : ${id}</strong <br>  ${student.getInfo()}`;
+
+                const btn = document.createElement('button');
+                btn.textContent = 'Show Greeting';
+
+                //event handling 
+
+                btn.addEventListener('click', ()=>{
+                    alert(`Hello , ${Student.name} ! Keep up the Good work!`);
+                });
+
+                card.appendChild(btn);
+                container.appendChild(card);
+        });
+
+
+        //object Example
+
+        const School = {
+                 name : 'Future Academy',
+                 location : 'Online',
+                 students : students,
+                 getStudentCount(){
+                    return this.students.length;
+                 }
+        };
+
+        console.log(`School : ${school.name} , Total Students : ${school.getStudentCount()}`);
+        
+    </script>
+</body>
+</html>
